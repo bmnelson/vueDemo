@@ -1,0 +1,58 @@
+const path = require('path');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+var webpack =require('webpack');
+
+module.exports = {
+    mode: 'development',
+    entry: {
+        vueApp: './src/index.js',
+
+    },
+    output: {
+        path: path.resolve(__dirname, "./dist/js"),
+        filename: 'bundle.js'
+    },
+
+    resolve: {
+        extensions: ['.js', '.vue', '.json'],
+    },
+    module: {
+        rules: [
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /.(eot|svg|ttf|woff|woff2)$/,
+                loader: 'url-loader'
+            }
+        ]
+    },
+
+
+    devServer: {
+        //设置服务器访问的基本目录
+        contentBase: path.resolve(__dirname, './'), // 要求服务器访问dist目录
+        host: 'localhost', // 设置服务器ip地址，可以是localhost
+        port: 8080, // 设置端口号
+        open: true, //自动拉起浏览器
+        hot: true,//模块热跟新
+        proxy: {
+            '/api/**': {
+                target: 'https://www.sojson.com',
+                secure: false,
+                changeOrigin: true,
+                pathRewrite: {'^/api': '/'}
+            }
+        }
+    },
+
+    plugins: [
+        new VueLoaderPlugin(),
+
+    ]
+}
