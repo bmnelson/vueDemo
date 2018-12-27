@@ -6,7 +6,7 @@
             </el-header>
             <el-main class="elmain" :style="elmain">
                 <el-button @click="authorized"
-                           v-loading.fullscreen.lock="fullscreenLoading">授权GitHub登录
+                           v-loading.fullscreen.lock="loading">授权GitHub登录
                 </el-button>
             </el-main>
             <el-footer class="elfooter" :style="footer">
@@ -45,6 +45,8 @@
 
 <script>
     import size from '../../utils/getSize';
+    import {mapGetters} from 'vuex';
+    import {ISLOADING} from "../../store/mutation-types";
 
     export default {
         name: "indexpage",
@@ -54,18 +56,32 @@
                 footer: {
                     height: size.height(4)
                 },
-                elmain:{
-                    height:size.height(4,2)
+                elmain: {
+                    height: size.height(4, 2)
                 }
             }
         },
+        computed: {
+            ...mapGetters([
+                'loading'
+            ])
+        },
         methods: {
             authorized: function () {
-                this.$login.login(this);
+                let that = this;
+                this.$store.commit(ISLOADING, true);
+                this.$login.login(this).then(() => {
+                    that.time = setTimeout(() => {
+                        that.$store.commit(ISLOADING, false);
+                    }, 2000);
+                });
             },
         },
         mounted() {
 
+        },
+        destroyed() {
+            clearTimeout(this.time);
         }
     }
 </script>
