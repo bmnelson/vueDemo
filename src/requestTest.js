@@ -1,13 +1,12 @@
 import axios from 'axios';
-import qs from 'qs';
+// import qs from 'qs';
 
 let http_custom = {
     post: "",
     get: ""
 }
 
-http_custom.get = function (url, data) {
-    let param = qs.stringify(data);
+http_custom.get = function (url, param = {}) {
     return new Promise((resolve, reject) => {
         axios.get(url, param).then((res) => {
             resolve(res.data);
@@ -17,12 +16,11 @@ http_custom.get = function (url, data) {
     })
 }
 
-http_custom.post = function (url, data) {
-    let param=qs.stringify(data);
+http_custom.post = function (url, param = {},header={}) {
     return new Promise((resolve, reject) => {
-        axios.post(url, param).then((res)=>{
+        axios.post(url, param,header).then((res) => {
             resolve(res.data);
-        }).catch((error)=>{
+        }).catch((error) => {
             reject(error);
         })
     })

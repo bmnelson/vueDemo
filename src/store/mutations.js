@@ -1,4 +1,14 @@
-import {ADDCHARA, ADDSTUDENT, CHANGENAME, INCREACE, DELETEITEM, TESTAPI} from "./mutation-types";
+import {
+    ADDCHARA,
+    ADDSTUDENT,
+    CHANGENAME,
+    INCREACE,
+    DELETEITEM,
+    TESTAPI,
+    FETCH_REPO_IMMU,
+    USERINFO_IMMU,
+    ISLOADING
+} from "./mutation-types";
 
 export const mutations = {
     [INCREACE](state) {
@@ -16,9 +26,18 @@ export const mutations = {
     [DELETEITEM](state, index) {
         state.tableData.splice(index, 1);
     },
-    [TESTAPI](state,res) {
+    [TESTAPI](state, res) {
         state.testapi = res;
         alert('mutations修改state成功');
+    },
+    [FETCH_REPO_IMMU](state, res) {
+        state.repositories = res;
+    },
+    [USERINFO_IMMU](state, res) {
+        state.userinfo = res;
+    },
+    [ISLOADING](state,loading){
+        state.loading=loading;
     }
 
 }

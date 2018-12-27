@@ -50,7 +50,7 @@
 
 <script>
 
-    import {mapState, mapGetters, mapActions} from 'vuex';
+        import {mapState, mapGetters, mapActions} from 'vuex';
     import {ADDCHARA, DELETEITEM, TESTAPI} from "../../store/mutation-types";
     import {TESTACTION} from "../../store/action-type";
 

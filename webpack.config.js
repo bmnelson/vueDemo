@@ -41,12 +41,24 @@ module.exports = {
         port: 8080, // 设置端口号
         open: true, //自动拉起浏览器
         hot: true,//模块热跟新
+        historyApiFallback:{
+            rewrites:[
+                {from:/./,to:'/index.html'}
+            ]
+        },
         proxy: {
             '/api/**': {
                 target: 'https://www.sojson.com',
                 secure: false,
                 changeOrigin: true,
                 pathRewrite: {'^/api': '/'}
+            },
+            '/github/**':{
+                target:'https://github.com',
+                changeOrigin:true,
+                pathRewrite:{
+                    '^/github':'/'
+                }
             }
         }
     },
