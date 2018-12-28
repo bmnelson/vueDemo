@@ -9,12 +9,14 @@ import querystring from 'querystring';
 import login from '../src/utils/github_login';
 import token  from '../src/utils/gettoken';
 import http_custom from '../src/requestTest';
+import repos from '../src/utils/repository';
 
 Vue.prototype.$config=config;
 Vue.prototype.$querystring =querystring;
 Vue.prototype.$login=login;
 Vue.prototype.$token=token;
 Vue.prototype.$http=http_custom;
+Vue.prototype.$repos=repos;
 
 Vue.use(ElementUI);
 

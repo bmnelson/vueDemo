@@ -8,6 +8,7 @@ let loginUtils = {
                 state: vue.$config.state,
                 redirect_uri: vue.$config.redirect_uri,
             }))
+            console.log(authorizationUrl,"check this out");
             window.location.href = authorizationUrl;
         })
 

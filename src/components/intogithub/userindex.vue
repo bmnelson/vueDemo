@@ -6,16 +6,24 @@
                     <el-submenu index="1">
                         <template slot="title"><i class="el-icon-message"></i>-GitHub-</template>
                         <el-menu-item-group>
-                            <template slot="title">操作</template>
-                            <el-menu-item index="1-1">新增项目</el-menu-item>
-                            <el-menu-item index="1-2">选项2</el-menu-item>
+                            <template slot="title">Repository</template>
+                            <el-menu-item index="1-1">
+                                <router-link to="/createrepo">
+                                    <li>Create Respository</li>
+                                </router-link>
+                            </el-menu-item>
+                            <el-menu-item index="1-2">
+                                <router-link to="/showrepo">
+                                    <li>Check Respository</li>
+                                </router-link>
+                            </el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                 </el-menu>
             </el-aside>
 
             <el-container>
-                <el-header style="text-align: right; font-size: 30px">
+                <el-header style="text-align: right; font-size: 15px">
                     <el-dropdown>
                         <i class="el-icon-setting" style="margin-right: 30px"></i>
                         <el-dropdown-menu slot="dropdown">
@@ -28,16 +36,7 @@
                     <img class="avatar" :src="userinfo.avatar_url"/>
                 </el-header>
 
-                <el-main>
-                    <el-table :data="repositories" v-loading="loading">
-                        <el-table-column align="left" min-width="30%" prop="name" label="Project-Name" width="140">
-                        </el-table-column>
-                        <el-table-column align="center" prop="owner.login" label="Owner" width="120">
-                        </el-table-column>
-                        <el-table-column align="right" prop="description" label="Description">
-                        </el-table-column>
-                    </el-table>
-                </el-main>
+                <router-view></router-view>
             </el-container>
         </el-container>
     </div>
@@ -47,15 +46,15 @@
         display: inline-block;
         height: 50px;
         width: 50px;
-        padding:10px;
+        border-radius: 25px;
+        padding: 10px;
     }
 </style>
 <script>
 
 
     import {mapState, mapGetters, mapActions} from 'vuex';
-    import {FETCH_REPOSITRIES} from "../../store/action-type";
-    import {USERINFO_IMMU, ISLOADING} from "../../store/mutation-types";
+    import {USERINFO_IMMU} from "../../store/mutation-types";
     import size from '../../utils/getSize';
 
     export default {
@@ -66,17 +65,15 @@
                     height: size.height,
                     border: '2px solid #eee'
                 },
-                asider:{
-                    height:size.height,
-                    backgroundColor:'#fff'
+                asider: {
+                    height: size.height,
+                    backgroundColor: '#fff'
                 }
             }
         },
         computed: {
             ...mapGetters([
-                'repositories',
-                'userinfo',
-                'loading'
+                'userinfo'
             ])
         },
         methods: {
@@ -85,32 +82,20 @@
                 let that = this;
                 this.$http.get(this.$config.userInfoUri, {
                     header: {
-                        "Accept": "application/json"
+                        "Accept": "application/vnd.github.v3+json"
                     },
                     params: {
                         access_token: tokenInfo.access_token
                     }
                 }).then((rs) => {
                     that.$store.commit(USERINFO_IMMU, rs);
-
                 })
-            },
-            showRepositories: function () {
-                let that = this;
-                this.$store.commit(ISLOADING, true);
-                console.log(this.$store.state.loading);
-                this.$store.dispatch(FETCH_REPOSITRIES, {headers: {"Accept": "application/json"}}).then(() => {
-                    this.t = setTimeout(() => {
-                        that.$store.commit(ISLOADING, false);
-                    }, 2000);
-
-                });
             }
         },
         mounted() {
             this.loadUserInfo();
         },
-        destroyed(){
+        destroyed() {
             clearTimeout(this.t)
         }
     }

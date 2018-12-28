@@ -16,9 +16,9 @@ http_custom.get = function (url, param = {}) {
     })
 }
 
-http_custom.post = function (url, param = {},header={}) {
+http_custom.post = function (url, param = {},headers={}) {
     return new Promise((resolve, reject) => {
-        axios.post(url, param,header).then((res) => {
+        axios.post(url, param,headers).then((res) => {
             resolve(res.data);
         }).catch((error) => {
             reject(error);
