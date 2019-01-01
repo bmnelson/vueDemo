@@ -10,8 +10,7 @@ let token = {
                 code: code,
                 redirect_uri: vue.$config.redirect_uri,
                 grant_type: vue.$config.grant_type
-            },
-            {headers: {"Accept": "application/json"}}
+            }
         ).then((rs) => {
             callback(rs);
         })

@@ -81,12 +81,7 @@
                 let tokenInfo = this.$token.loadToken();
                 let that = this;
                 this.$http.get(this.$config.userInfoUri, {
-                    header: {
-                        "Accept": "application/vnd.github.v3+json"
-                    },
-                    params: {
-                        access_token: tokenInfo.access_token
-                    }
+                    access_token: tokenInfo.access_token
                 }).then((rs) => {
                     that.$store.commit(USERINFO_IMMU, rs);
                 })

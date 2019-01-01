@@ -31,7 +31,7 @@
                 let that = this;
                 this.$store.commit(ISLOADING, true);
                 console.log(this.$store.state.loading);
-                this.$store.dispatch(FETCH_REPOSITRIES, {headers: {"Accept": "application/vnd.github.v3+json"}}).then(() => {
+                this.$store.dispatch(FETCH_REPOSITRIES).then(() => {
                     this.t = setTimeout(() => {
                         that.$store.commit(ISLOADING, false);
                     }, 2000);

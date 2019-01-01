@@ -6,6 +6,7 @@ import Login from '../components/intogithub/login';
 import User from '../components/intogithub/userindex';
 import CreateRepo from '../components/intogithub/createrepo';
 import ShowRepo from '../components/intogithub/showrepo';
+import errorPage from '../components/intogithub/errorpage';
 
 import Index from '../components/index/index';
 import VueRouter from 'vue-router';
@@ -19,6 +20,8 @@ const routes = [
     {path: '/knowledge', component: Knowledge},
     {path: '/login', component: Login},
     {path: '/', component: Index},
+    {path: '/error', component: errorPage},
+
     {
         path: '/user',
         component: User,

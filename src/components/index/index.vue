@@ -50,6 +50,7 @@
 
     export default {
         name: "indexpage",
+
         data() {
             return {
                 fullscreenLoading: false,
@@ -77,9 +78,13 @@
                 });
             },
         },
-        mounted() {
+        beforeMount() {
 
         },
+        mounted() {
+
+        }
+        ,
         destroyed() {
             clearTimeout(this.time);
         }

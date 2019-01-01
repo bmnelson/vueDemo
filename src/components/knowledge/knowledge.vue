@@ -20,7 +20,7 @@
         </div>
         <div>
             <el-button>Http-respsonse:1.状态行statu 2.响应头部 3.空行 4.响应正文</el-button>
-
+            <el-button>正则表达式三中括号:1.[] 2.{}限定表达符 3.()</el-button>
         </div>
         <!--怎么阻止事件的冒泡-->
         <div @click="divClick">
@@ -35,7 +35,6 @@
         </div>
     </div>
 </template>
-
 
 
 <script>

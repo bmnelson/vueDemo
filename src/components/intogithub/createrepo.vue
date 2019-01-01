@@ -2,13 +2,17 @@
     <div class="mainItem">
         <el-form ref="form" :model="form" label-width="200px" size="small">
             <el-form-item label="Repository Name">
-                <el-input v-model="form.name"></el-input>
+                <el-input @input="ifNull(0)" @change="ifValidate(0)" v-model="form.name"></el-input>
+                <em v-show="showS[0]">*</em>
             </el-form-item>
             <el-form-item label="Description">
-                <el-input v-model="form.description"></el-input>
+                <el-input @input="ifNull(1)" @change="ifValidate(1)" v-model="form.description"></el-input>
+                <em v-show="showS[1]">*</em>
             </el-form-item>
             <el-form-item label="Home Page">
-                <el-input v-model="form.homepage"></el-input>
+                <el-input @input="ifNull(2)" @change="ifValidate(2) " v-model="form.homepage"></el-input>
+                <em v-show="showS[2]">*</em>
+
             </el-form-item>
 
             <el-form-item label="Private">
@@ -35,6 +39,10 @@
     </div>
 </template>
 <style>
+    em {
+        color: red;
+    }
+
     .mainItem {
         padding: 50px;
     }
@@ -51,6 +59,7 @@
         name: "createrepo",
         data() {
             return {
+                showStar: [true, true, true],
                 form: {
                     name: "",
                     description: "",
@@ -63,7 +72,10 @@
             }
         },
         computed: {
-            ...mapGetters(['loading'])
+            ...mapGetters(['loading']),
+            showS: function () {
+                return this.showStar;
+            }
         },
         methods: {
             createRepo: function () {
@@ -79,12 +91,7 @@
                 let tokenInfo = this.$token.loadToken();
 
                 this.$http.get(this.$config.checkMyAuth, {
-                    header: {
-                        "Accept": "application/vnd.github.v3+json"
-                    },
-                    params: {
-                        access_token: tokenInfo.access_token
-                    }
+                    access_token: tokenInfo.access_token
                 }).then((rs) => {
                     console.log(rs)
                 })
@@ -93,15 +100,31 @@
                 let tokenInfo = this.$token.loadToken();
 
                 this.$http.get(this.$config.getSingeGrant(1), {
-                    header: {
-                        "Accept": "application/vnd.github.v3+json"
-                    },
-                    params: {
-                        access_token: tokenInfo.access_token
-                    }
+                    access_token: tokenInfo.access_token
                 }).then((rs) => {
                     console.log(rs)
                 })
+            },
+            checkStringLength: function (str) {
+                return str.length == 0;
+            },
+            ifNull: function (e) {
+                switch (e) {
+                    case 0:
+                        this.showS[e] = this.checkStringLength(this.form.name);
+                        break;
+                    case 1:
+                        this.showS[e] = this.checkStringLength(this.form.description);
+                        break;
+                    case 2:
+                        this.showS[e] = this.checkStringLength((this.form.homepage));
+                        break;
+
+                }
+            },
+            ifValidate: function (e) {
+                let model = "this." + e;
+                console.log([model]);
             }
         }
     }
