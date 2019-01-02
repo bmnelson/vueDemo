@@ -71,19 +71,9 @@
 </template>
 
 <style>
-    .router {
-        border-bottom: #000 3px solid;
-    }
-
-    li {
-        margin-left: 10px;
-    }
-
-    .custom_li {
-        display: inline-block;
-        font-size: 20px;
-        font-style: normal;
-        padding-bottom: 5px;
+    body {
+        padding: 0;
+        margin: 0;
     }
 </style>
 

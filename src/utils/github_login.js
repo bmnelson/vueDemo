@@ -16,7 +16,7 @@ let loginUtils = {
         vue.$router.push('/logout' + "?redirect_url=" + redirect_url);
     },
     checkLogin: function (vue) {
-        return vue.$token.loadToken().access_token != null && vue.$token.loadToken().access_token != "";
+        return vue.$token.loadToken().access_token != null;
     }
 }
 

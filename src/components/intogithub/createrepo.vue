@@ -1,20 +1,18 @@
 <template>
     <div class="mainItem">
-        <el-form ref="form" :model="form" label-width="200px" size="small">
-            <el-form-item label="Repository Name">
+        <el-form ref="form" :rules="rules" :model="form" label-width="200px" size="mini">
+            <el-form-item label="Repository Name" prop="name">
                 <el-input @input="ifNull(0)" @change="ifValidate(0)" v-model="form.name"></el-input>
-                <em v-show="showS[0]">*</em>
+                <!--<em v-show="showS[0]">*</em>-->
             </el-form-item>
-            <el-form-item label="Description">
+            <el-form-item label="Description" prop="description">
                 <el-input @input="ifNull(1)" @change="ifValidate(1)" v-model="form.description"></el-input>
-                <em v-show="showS[1]">*</em>
+                <!--<em v-show="showS[1]">*</em>-->
             </el-form-item>
-            <el-form-item label="Home Page">
+            <el-form-item label="Home Page" prop="homepage">
                 <el-input @input="ifNull(2)" @change="ifValidate(2) " v-model="form.homepage"></el-input>
-                <em v-show="showS[2]">*</em>
-
+                <!--<em v-show="showS[2]">*</em>-->
             </el-form-item>
-
             <el-form-item label="Private">
                 <el-switch v-model="form.private"></el-switch>
             </el-form-item>
@@ -60,6 +58,18 @@
         data() {
             return {
                 showStar: [true, true, true],
+                rules: {
+                    name: [
+                        {required: true, message: '请输入仓库名称', trigger: 'blur,change'},
+                        {min: 5, max: 20, message: '长度在 5 到 20 个字符', trigger: 'blur'}
+                    ],
+                    description: [
+                        {required: true, message: '请输入描述', trigger: 'change'}
+                    ],
+                    homepage: [
+                        {type: 'url', required: true, message: '请输入主页', trigger: 'change'}
+                    ]
+                },
                 form: {
                     name: "",
                     description: "",
@@ -123,8 +133,7 @@
                 }
             },
             ifValidate: function (e) {
-                let model = "this." + e;
-                console.log([model]);
+
             }
         }
     }

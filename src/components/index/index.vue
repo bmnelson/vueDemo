@@ -77,9 +77,21 @@
                     }, 2000);
                 });
             },
+            checkLogin: function () {
+                if (this.$login.checkLogin(this)) {
+                    this.$router.push('/user');
+                }
+            }
         },
         beforeMount() {
-
+            this.checkLogin();
+            let message = this.$route.query.message;
+            if (message) {
+                this.$message({
+                    type: 'info',
+                    message: message
+                });
+            }
         },
         mounted() {
 

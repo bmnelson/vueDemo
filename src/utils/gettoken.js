@@ -1,5 +1,7 @@
 import http_custom from '../requestTest';
 
+const localStorage = window.localStorage;
+
 let token = {
     receiveToken: function (vue, code, callback) {
         http_custom.post(
@@ -16,20 +18,23 @@ let token = {
         })
     },
     savetoken: function (token) {
-        sessionStorage.setItem("access_token", token.access_token);
-        sessionStorage.setItem("token_type", token.token_type);
-        sessionStorage.setItem("scope", token.scope);
+        localStorage.setItem("access_token", token.access_token);
+        localStorage.setItem("token_type", token.token_type);
+        localStorage.setItem("scope", token.scope);
     },
     deleteToken: function () {
-        sessionStorage.setItem("access_token", null);
-        sessionStorage.setItem("scope", null);
-        sessionStorage.setItem("token_type", null);
+        return new Promise((rs, rj) => {
+            localStorage.removeItem("access_token");
+            localStorage.removeItem("token_type");
+            localStorage.removeItem("scope");
+            console.log(localStorage.getItem("access_token"), "access_token");
+        })
     },
     loadToken: function () {
         let tokenInfo = {};
-        tokenInfo.access_token = sessionStorage.getItem("access_token");
-        tokenInfo.token_type = sessionStorage.getItem("token_type");
-        tokenInfo.token_scope=sessionStorage.getItem("scope");
+        tokenInfo.access_token = localStorage.getItem("access_token");
+        tokenInfo.token_type = localStorage.getItem("token_type");
+        tokenInfo.token_scope = localStorage.getItem("scope");
         return tokenInfo;
     },
 }
