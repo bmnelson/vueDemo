@@ -2,16 +2,19 @@
     <div>
         <el-container :style="container">
             <el-header class="el-he" :style="header">
-                <el-dropdown>
-                    <i class="el-icon-setting" style="margin-right: 30px"></i>
-                    <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item @click.native="showRepositories">Your Repositories</el-dropdown-item>
-                        <el-dropdown-item>Add New Repositories</el-dropdown-item>
-                        <el-dropdown-item>删除</el-dropdown-item>
-                    </el-dropdown-menu>
-                </el-dropdown>
-                <span>{{userinfo.login}}</span>
-                <img @click="logout" class="avatar" :src="userinfo.avatar_url"/>
+                <div class="headerInfo">
+                    <el-dropdown>
+                        <i class="el-icon-setting" style="margin-right: 30px"></i>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item @click.native="showRepositories">Your Repositories</el-dropdown-item>
+                            <el-dropdown-item>Add New Repositories</el-dropdown-item>
+                            <el-dropdown-item>删除</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                    <p>{{userinfo.login}}</p>
+                    <img @click="logout" class="avatar" :src="userinfo.avatar_url"/>
+                </div>
+
             </el-header>
             <el-main :style="main">
                 <el-container>
@@ -41,13 +44,22 @@
                 </el-container>
             </el-main>
             <el-footer class="elfooter" :style="footer">
-                <div class="elfooterContent"><p>
-                </p></div>
+
             </el-footer>
         </el-container>
+        <div class="elfooterContent">
+            <p>Footer--个人练习Demo--Footer</p>
+        </div>
     </div>
 </template>
 <style>
+    .headerInfo {
+        display: flex;
+        justify-content: flex-end;
+        padding: 20px;
+        align-items: center;
+    }
+
     .avatar {
         display: inline-block;
         height: 50px;
@@ -68,11 +80,13 @@
     }
 
     .elfooterContent {
-        position: absolute;
-        bottom: 50px;
-        left: 50%;
+        width: 300px;
         font-size: 15px;
-        color: #666;
+        position: absolute;
+        left: 50%;
+        margin-left: -150px;
+        bottom: 100px;
+        color: #888;
     }
 </style>
 <script>
@@ -104,7 +118,7 @@
                 asider: {
                     height: size.height(2),
                     backgroundColor: '#fff',
-                    borderRight:'1px solid #eee'
+                    borderRight: '1px solid #eee'
                 }
             }
         },
