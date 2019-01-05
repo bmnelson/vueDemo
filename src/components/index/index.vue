@@ -16,7 +16,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
     .elheader {
         display: flex;
         background-color: #444;

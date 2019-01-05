@@ -16,30 +16,67 @@ import token from '../utils/gettoken';
 Vue.use(VueRouter);
 
 const routes = [
-    {path: '/enemy', component: Enemy},
-    {path: '/player', component: Player},
-    {path: '/knowledge', component: Knowledge},
-    {path: '/login', component: Login},
-    {path: '/', component: Index},
-    {path: '/error', component: errorPage},
+    {
+        path: '/enemy',
+        component: Enemy,
+        name: '测试页',
+        meta: {title: '测试页', icon: 'example'}
+    },
+    {
+        path: '/player',
+        component: Player,
+        name: '测试页2',
+        meta: {title: '测试页2', icon: 'example'},
+    },
+    {
+        path: '/knowledge',
+        component: Knowledge,
+        name: '总结知识测试页',
+        meta: {title: '总结知识测试页', icon: 'example'},
+    },
+    {
+        path: '/login',
+        component: Login,
+        name: '跳转页',
+        meta: {title: '跳转页', icon: 'example'},
+    },
+    {
+        path: '/',
+        component: Index,
+        name: '主页'
+    },
+    {
+        path: '/error',
+        component: errorPage,
+        name: '错误页',
+        meta: {title: '错误页', icon: 'tree'},
+    },
 
     {
         path: '/user',
         component: User,
+        name: '主页',
         meta: {
             requireAuth: true,
         },
         children: [
             {
-                path: '/createrepo', meta: {
+                path: '/createrepo',
+                meta: {
+                    title: '错误页',
                     requireAuth: true,
-                }, component: CreateRepo
+                },
+                component: CreateRepo,
+                name: '创建仓库'
             },
             {
                 path: '/showrepo',
                 meta: {
+                    title: '错误页',
                     requireAuth: true,
-                }, component: ShowRepo
+                },
+                component: ShowRepo,
+                name: '查看仓库'
             }
         ]
     }
