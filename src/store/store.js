@@ -7,6 +7,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
+        status:localStorage.getItem("access_token") || '',
         sum: 0,
         list: [{
             name: 'nelson',

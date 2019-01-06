@@ -8,7 +8,7 @@ import {
     FETCH_REPO_IMMU,
     USERINFO_IMMU,
     ISLOADING
-} from "./mutation-types";
+} from "./mutation/mutation-types";
 
 export const mutations = {
     [INCREACE](state) {

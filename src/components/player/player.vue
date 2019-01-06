@@ -51,8 +51,8 @@
 <script>
 
         import {mapState, mapGetters, mapActions} from 'vuex';
-    import {ADDCHARA, DELETEITEM, TESTAPI} from "../../store/mutation-types";
-    import {TESTACTION} from "../../store/action-type";
+    import {ADDCHARA, DELETEITEM, TESTAPI} from "../../store/mutation/mutation-types";
+    import {TESTACTION} from "../../store/action/action-type";
 
     export default {
         name: "player",

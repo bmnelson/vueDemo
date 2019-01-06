@@ -1,6 +1,6 @@
 import http_custom from '../requestTest';
-import {TESTAPI, FETCH_REPO_IMMU} from "./mutation-types";
-import {TESTACTION, FETCH_REPOSITRIES} from "./action-type";
+import {TESTAPI, FETCH_REPO_IMMU} from "./mutation/mutation-types";
+import {TESTACTION, FETCH_REPOSITRIES} from "./action/action-type";
 
 export const actions = {
     [TESTACTION]({commit, state}, params = {}) {

@@ -51,7 +51,7 @@
 </style>
 <script>
     import {mapGetters} from 'vuex';
-    import {ISLOADING} from "../../store/mutation-types";
+    import {ISLOADING} from "../../store/mutation/mutation-types";
 
     export default {
         name: "createrepo",

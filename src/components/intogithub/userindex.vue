@@ -93,7 +93,7 @@
 
 
     import {mapState, mapGetters, mapActions} from 'vuex';
-    import {USERINFO_IMMU} from "../../store/mutation-types";
+    import {USERINFO_IMMU} from "../../store/mutation/mutation-types";
     import size from '../../utils/getSize';
 
     export default {
