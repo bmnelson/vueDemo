@@ -1,6 +1,6 @@
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-var webpack =require('webpack');
+var webpack = require('webpack');
 
 module.exports = {
     mode: 'development',
@@ -14,6 +14,7 @@ module.exports = {
     },
 
     resolve: {
+        alias: {'@': path.resolve(__dirname, './src/'),},
         extensions: ['.js', '.vue', '.json'],
     },
     module: {
@@ -41,9 +42,9 @@ module.exports = {
         port: 8080, // 设置端口号
         open: true, //自动拉起浏览器
         hot: true,//模块热跟新
-        historyApiFallback:{
-            rewrites:[
-                {from:/./,to:'/index.html'}
+        historyApiFallback: {
+            rewrites: [
+                {from: /./, to: '/index.html'}
             ]
         },
         proxy: {
@@ -53,11 +54,11 @@ module.exports = {
                 changeOrigin: true,
                 pathRewrite: {'^/api': '/'}
             },
-            '/github/**':{
-                target:'https://github.com',
-                changeOrigin:true,
-                pathRewrite:{
-                    '^/github':'/'
+            '/github/**': {
+                target: 'https://github.com',
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/github': '/'
                 }
             }
         }

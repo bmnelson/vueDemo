@@ -1,62 +1,51 @@
 <template>
     <div>
-        <el-container :style="container">
-            <el-header class="el-he" :style="header">
-                <div class="headerInfo">
-                    <el-dropdown>
-                        <i class="el-icon-setting" style="margin-right: 30px"></i>
-                        <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item @click.native="showRepositories">Your Repositories</el-dropdown-item>
-                            <el-dropdown-item>Add New Repositories</el-dropdown-item>
-                            <el-dropdown-item>删除</el-dropdown-item>
-                        </el-dropdown-menu>
-                    </el-dropdown>
-                    <p>{{userinfo.login}}</p>
-                    <img @click="logout" class="avatar" :src="userinfo.avatar_url"/>
-                </div>
-
-            </el-header>
-            <el-main :style="main">
-                <el-container>
-                    <el-aside width="260px" :style="asider">
-                        <el-menu :default-openeds="['1', '3']">
-                            <el-submenu index="1">
-                                <template slot="title"><i class="el-icon-message"></i>-GitHub-</template>
-                                <el-menu-item-group>
-                                    <template slot="title">Repository</template>
-                                    <el-menu-item index="1-1">
-                                        <router-link to="/createrepo">
-                                            <li>Create Respository</li>
-                                        </router-link>
-                                    </el-menu-item>
-                                    <el-menu-item index="1-2">
-                                        <router-link to="/showrepo">
-                                            <li>Check Respository</li>
-                                        </router-link>
-                                    </el-menu-item>
-                                </el-menu-item-group>
-                            </el-submenu>
-                        </el-menu>
-                    </el-aside>
+        <el-container class="container">
+            <aside-nav></aside-nav>
+            <el-main class="elmain">
+                <el-container class="rightContainer">
+                    <el-header class="el-he" :style="header">
+                        <div class="headerInfo">
+                            <el-dropdown>
+                                <i class="el-icon-setting" style="margin-right: 30px"></i>
+                                <el-dropdown-menu slot="dropdown">
+                                    <el-dropdown-item @click.native="showRepositories">Your Repositories
+                                    </el-dropdown-item>
+                                    <el-dropdown-item>Add New Repositories</el-dropdown-item>
+                                    <el-dropdown-item>删除</el-dropdown-item>
+                                </el-dropdown-menu>
+                            </el-dropdown>
+                            <p>{{userinfo.login}}</p>
+                            <img alt="" @click="logout" class="avatar" :src="userinfo.avatar_url"/>
+                        </div>
+                    </el-header>
                     <el-main>
                         <router-view></router-view>
                     </el-main>
+                    <el-footer class="elfooter">
+                        <p>@Practice Demo 2019-01-05 Author:NelsonLi</p>
+                    </el-footer>
                 </el-container>
             </el-main>
-            <el-footer class="elfooter" :style="footer">
-
-            </el-footer>
         </el-container>
-        <div class="elfooterContent">
-            <p>Footer--个人练习Demo--Footer</p>
-        </div>
     </div>
 </template>
-<style>
+<style scoped>
+    .container {
+        height: 100vh;
+    }
+
+    .rightContainer {
+        height: 100%;
+    }
+
+    .elmain {
+        padding: 0;
+    }
+
     .headerInfo {
         display: flex;
         justify-content: flex-end;
-        padding: 20px;
         align-items: center;
     }
 
@@ -74,18 +63,9 @@
     }
 
     .elfooter {
-        padding-top: 10px;
-        position: absolute;
-        bottom: 0;
-    }
-
-    .elfooterContent {
-        width: 300px;
+        display: flex;
+        justify-content: center;
         font-size: 15px;
-        position: absolute;
-        left: 50%;
-        margin-left: -150px;
-        bottom: 100px;
         color: #888;
     }
 </style>
@@ -95,30 +75,27 @@
     import {mapState, mapGetters, mapActions} from 'vuex';
     import {USERINFO_IMMU} from "../../store/mutation/mutation-types";
     import size from '../../utils/getSize';
+    import AsideNav from '../../components/AsiderNav';
 
     export default {
         name: "user",
+        components: {
+            AsideNav
+        },
         data() {
             return {
+
                 main: {
                     height: size.height(2)
                 },
-                footer: {
-                    height: size.height(4)
-                },
                 header: {
-                    height: size.height(8, 1),
+                    height: size.height(12, 1),
                     textAlign: 'right',
                     fontSize: '15px'
                 },
                 container: {
-                    height: size.height,
+                    height: size.height(),
                     border: '2px solid #eee'
-                },
-                asider: {
-                    height: size.height(2),
-                    backgroundColor: '#fff',
-                    borderRight: '1px solid #eee'
                 }
             }
         },
