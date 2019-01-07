@@ -32,7 +32,7 @@ const routes = [
         component: Layout,
         redirect: '/enemy/enemylist',
         name: 'Enemy',
-        meta: {title: 'Enemy', icon: 'document'},
+        meta: {title: 'Enemy', icon: 'icon-creditcard'},
         children: [{
             path: 'enemylist',
             component: Enemy
@@ -43,7 +43,7 @@ const routes = [
         component: Layout,
         redirect: '/player/playerlist',
         name: 'Player',
-        meta: {title: 'Player', icon: 'ticket'},
+        meta: {title: 'Player', icon: 'icon-icon'},
         children: [{
             path: 'playerlist',
             component: Player
@@ -54,7 +54,7 @@ const routes = [
         component: Layout,
         redirect: '/knowledge/knowledgelist',
         name: '总结知识测试页',
-        meta: {title: '总结知识测试页', icon: 'printer'},
+        meta: {title: '总结知识测试页', icon: 'icon-meh-fill'},
         children: [{
             path: 'knowledgelist',
             component: Knowledge
@@ -65,14 +65,14 @@ const routes = [
         component: Login,
         hidden: true,
         name: '跳转页',
-        meta: {title: '跳转页', icon: 'share'},
+        meta: {title: '跳转页', icon: 'icon-folder-fill'},
     },
     {
         path: '/error',
         component: Layout,
         redirect: '/error/errorshow',
         name: '错误页',
-        meta: {title: '错误页', icon: 'news'},
+        meta: {title: '错误页', icon: 'icon-error'},
         children: [{
             path: 'errorshow',
             component: ErrorPage
@@ -86,7 +86,7 @@ const routes = [
         meta: {
             requireAuth: true,
             title: '仓库相关',
-            icon: 'setting'
+            icon: 'icon-wrench'
         },
         children: [
             {

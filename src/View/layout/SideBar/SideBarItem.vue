@@ -29,7 +29,11 @@
         </el-menu>
     </el-aside>
 </template>
-
+<style scoped>
+    .menu_wrap {
+        border-right: none;
+    }
+</style>
 <script>
     import MenuItem from "@/View/layout/SideBar/Item";
 
@@ -41,7 +45,8 @@
                 asider: {
                     borderRight: '1px solid #eee',
                     // color: '#A7ADB4',
-                    backgroundColor: '#304156'
+                    backgroundColor: '#304156',
+                    width: '200px'
                 },
                 menus: this.$router.options.routes
             }

@@ -16,7 +16,7 @@
             let {icon, title} = context.props;
             const vnode = [];
             return createElement('div', [
-                createElement('i', {class: 'el-icon-' + icon}),
+                createElement('i', {class: 'iconfont ' + icon, style: {padding: '10px'}}),
                 createElement('span', title)
             ]);
         }

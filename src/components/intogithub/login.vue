@@ -9,7 +9,7 @@
         name: "login",
         methods: {
             getInIndex() {
-                this.$router.push('/user');
+                this.$router.push('/enemy');
             },
             getToken: function () {
                 this.$token.receiveToken(this, this.code, (rs) => {
