@@ -31,6 +31,7 @@
         </el-container>
     </div>
 </template>
+
 <style scoped>
     .container {
         height: 100vh;
@@ -72,17 +73,16 @@
         color: #888;
     }
 </style>
+
 <script>
-
-
     import {mapState, mapGetters, mapActions} from 'vuex';
-    import {USERINFO_IMMU} from "../../store/mutation/mutation-types";
-    import size from '../../utils/getSize';
-    import SideBarItem from '../../View/layout/SideBar/SideBarItem';
+    import {USERINFO_IMMU} from "@/store/mutation-types";
+    import size from '@/utils/getSize';
+    import SideBarItem from '@/View/layout/SideBar/SideBarItem';
     import BreadCrumbHeader from '@/components/BreadCrumbHeader';
 
     export default {
-        name: "user",
+        name: "layout",
         components: {
             SideBarItem,
             BreadCrumbHeader
@@ -162,3 +162,4 @@
         }
     }
 </script>
+

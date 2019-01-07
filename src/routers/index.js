@@ -3,68 +3,97 @@ import Player from '../components/player/player';
 import Knowledge from '../components/knowledge/knowledge';
 
 import Login from '../components/intogithub/login';
-import User from '../components/intogithub/userindex';
 import CreateRepo from '../components/intogithub/createrepo';
 import ShowRepo from '../components/intogithub/showrepo';
-import errorPage from '../components/intogithub/errorpage';
+import ErrorPage from '../components/intogithub/errorpage';
 
 import Index from '../components/index/index';
 import VueRouter from 'vue-router';
 import Vue from 'vue';
 import token from '../utils/gettoken';
 
+import Layout from '@/View/layout/layout';
+
 Vue.use(VueRouter);
 
 const routes = [
     {
+        path: '/',
+        component: Index,
+        name: '主页',
+        hidden: true,
+        meta: {
+            title: '主页',
+            icon: ''
+        }
+    },
+    {
         path: '/enemy',
-        component: Enemy,
-        name: '测试页',
-        meta: {title: '测试页', icon: 'example'}
+        component: Layout,
+        redirect: '/enemy/enemylist',
+        name: 'Enemy',
+        meta: {title: 'Enemy', icon: 'icon-creditcard'},
+        children: [{
+            path: 'enemylist',
+            component: Enemy
+        }]
     },
     {
         path: '/player',
-        component: Player,
-        name: '测试页2',
-        meta: {title: '测试页2', icon: 'example'},
+        component: Layout,
+        redirect: '/player/playerlist',
+        name: 'Player',
+        meta: {title: 'Player', icon: 'icon-icon'},
+        children: [{
+            path: 'playerlist',
+            component: Player
+        }]
     },
     {
         path: '/knowledge',
-        component: Knowledge,
+        component: Layout,
+        redirect: '/knowledge/knowledgelist',
         name: '总结知识测试页',
-        meta: {title: '总结知识测试页', icon: 'example'},
+        meta: {title: '总结知识测试页', icon: 'icon-meh-fill'},
+        children: [{
+            path: 'knowledgelist',
+            component: Knowledge
+        }]
     },
     {
         path: '/login',
         component: Login,
+        hidden: true,
         name: '跳转页',
-        meta: {title: '跳转页', icon: 'example'},
-    },
-    {
-        path: '/',
-        component: Index,
-        name: '主页'
+        meta: {title: '跳转页', icon: 'icon-folder-fill'},
     },
     {
         path: '/error',
-        component: errorPage,
+        component: Layout,
+        redirect: '/error/errorshow',
         name: '错误页',
-        meta: {title: '错误页', icon: 'tree'},
+        meta: {title: '错误页', icon: 'icon-error'},
+        children: [{
+            path: 'errorshow',
+            component: ErrorPage
+        }]
     },
-
     {
         path: '/user',
-        component: User,
-        name: '主页',
+        component: Layout,
+        redirect: 'noredirect',
+        name: '仓库相关',
         meta: {
             requireAuth: true,
+            title: '仓库相关',
+            icon: 'icon-wrench'
         },
         children: [
             {
                 path: '/createrepo',
                 meta: {
-                    title: '错误页',
-                    requireAuth: true,
+                    title: '创建仓库',
+                    requireAuth: true
                 },
                 component: CreateRepo,
                 name: '创建仓库'
@@ -72,7 +101,7 @@ const routes = [
             {
                 path: '/showrepo',
                 meta: {
-                    title: '错误页',
+                    title: '查看仓库',
                     requireAuth: true,
                 },
                 component: ShowRepo,
@@ -88,6 +117,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+
     if (to.meta.requireAuth) {
         if (token.loadToken().access_token != null) {
             console.log("hasToken");
@@ -103,4 +133,5 @@ router.beforeEach((to, from, next) => {
         next();
     }
 });
+
 export default router;

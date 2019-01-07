@@ -10,6 +10,7 @@ import login from '../src/utils/github_login';
 import token  from '../src/utils/gettoken';
 import http_custom from '../src/requestTest';
 import repos from '../src/utils/repository';
+import icon from '../assets/iconfont/iconfont.css';
 
 Vue.prototype.$config=config;
 Vue.prototype.$querystring =querystring;
