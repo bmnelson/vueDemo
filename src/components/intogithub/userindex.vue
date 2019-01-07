@@ -76,7 +76,7 @@
 
 
     import {mapState, mapGetters, mapActions} from 'vuex';
-    import {USERINFO_IMMU} from "../../store/mutation/mutation-types";
+    import {USERINFO_IMMU} from "../../store/mutation-types";
     import size from '../../utils/getSize';
     import SideBarItem from '../../View/layout/SideBar/SideBarItem';
     import BreadCrumbHeader from '@/components/BreadCrumbHeader';

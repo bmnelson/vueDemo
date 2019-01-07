@@ -16,8 +16,8 @@
 <script>
     import {mapGetters} from 'vuex';
 
-    import {FETCH_REPOSITRIES} from "../../store/action/action-type";
-    import {ISLOADING} from "../../store/mutation/mutation-types";
+    import {FETCH_REPOSITRIES} from "../../store/action-type";
+    import {ISLOADING} from "../../store/mutation-types";
 
     export default {
         name: "showrepo",

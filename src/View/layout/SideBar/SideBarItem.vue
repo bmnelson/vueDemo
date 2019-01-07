@@ -54,7 +54,6 @@
 
         methods: {
             hasOnlyOneChildrenComponents: function (component) {
-                console.log(component, "check this out");
                 if (component.children) {
                     if (component.children.length === 1) {
                         return true;

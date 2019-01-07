@@ -6,9 +6,9 @@ module.exports = {
     mode: 'development',
     entry: {
         vueApp: './src/index.js',
-
     },
     output: {
+        publicPath: '/',
         path: path.resolve(__dirname, "./dist/js"),
         filename: 'bundle.js'
     },

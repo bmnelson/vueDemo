@@ -1,11 +1,12 @@
-import Enemy from '../components/enemy/enemy';
-import Player from '../components/player/player';
-import Knowledge from '../components/knowledge/knowledge';
+const Enemy = () => import('@/components/enemy/enemy');
+const Player = () => import('@/components/player/player');
+const Knowledge = () => import('@/components/knowledge/knowledge');
 
 import Login from '../components/intogithub/login';
-import CreateRepo from '../components/intogithub/createrepo';
-import ShowRepo from '../components/intogithub/showrepo';
-import ErrorPage from '../components/intogithub/errorpage';
+
+const CreateRepo = () => import('@/components/intogithub/createrepo');
+const ShowRepo = () => import('@/components/intogithub/showrepo');
+const ErrorPage = () => import('@/components/intogithub/errorpage');
 
 import Index from '../components/index/index';
 import VueRouter from 'vue-router';

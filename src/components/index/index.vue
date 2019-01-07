@@ -46,7 +46,7 @@
 <script>
     import size from '../../utils/getSize';
     import {mapGetters} from 'vuex';
-    import {ISLOADING} from "../../store/mutation/mutation-types";
+    import {ISLOADING} from "../../store/mutation-types";
 
     export default {
         name: "indexpage",

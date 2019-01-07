@@ -27,9 +27,6 @@
     import CustomDate from "../date/customdate.vue";
     import {mapState} from 'vuex';
 
-    $("#name").change(function () {
-        console.log("changed");
-    });
 
     export default {
         name: 'enemy',

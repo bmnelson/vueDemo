@@ -21,7 +21,6 @@
         },
         methods: {
             getBreadCrumbs() {
-                console.log("entergetbreadcrumbs");
                 let matched = this.$route.matched.filter(item => {
                     if (item.name) {
                         return true
