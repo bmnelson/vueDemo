@@ -79,7 +79,7 @@
             },
             checkLogin: function () {
                 if (this.$login.checkLogin(this)) {
-                    this.$router.push('/user');
+                    this.$router.push('/enemy');
                 }
             }
         },
