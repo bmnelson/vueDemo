@@ -19,21 +19,23 @@
         </div>
         <li>{{sum}}</li>
         <button @click="add">sum+1</button>
-
+        <el-button @click="showdia">dialog</el-button>
+        <pop-dialog :title="enemyName" :show.sync="show" @closeDia="closeDia"></pop-dialog>
     </div>
 </template>
 
 <script>
     import CustomDate from "../date/customdate.vue";
     import {mapState} from 'vuex';
-
+    import PopDialog from '@/components/PopDialog';
 
     export default {
         name: 'enemy',
-        components: {CustomDate},
+        components: {CustomDate, PopDialog},
         data() {
             return {
                 enemyName: 'Enemy One',
+                show: false
             }
         },
         computed: {
@@ -48,6 +50,12 @@
         methods: {
             add: function () {
                 this.$store.commit('increace');
+            },
+            showdia() {
+                this.show = true
+            },
+            closeDia() {
+                this.show = false
             },
             addStudent: function () {
                 console.log(this.$store.state.list);
