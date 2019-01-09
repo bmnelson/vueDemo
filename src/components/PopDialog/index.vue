@@ -2,11 +2,12 @@
     <el-dialog :title="title"
                :visible.sync="visible"
                @close="closeDia">
-
+    <slot></slot>
     </el-dialog>
 </template>
 
 <script>
+
     export default {
         name: "PopDialog",
         props: {

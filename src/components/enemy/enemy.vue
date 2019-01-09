@@ -20,7 +20,9 @@
         <li>{{sum}}</li>
         <button @click="add">sum+1</button>
         <el-button @click="showdia">dialog</el-button>
-        <pop-dialog :title="enemyName" :show.sync="show" @closeDia="closeDia"></pop-dialog>
+        <pop-dialog :title="enemyName" :show.sync="show" @closeDia="closeDia">
+            <form-test ref="form_test"></form-test>
+        </pop-dialog>
     </div>
 </template>
 
@@ -28,10 +30,15 @@
     import CustomDate from "../date/customdate.vue";
     import {mapState} from 'vuex';
     import PopDialog from '@/components/PopDialog';
+    import FormTest from '@/components/PopDialog/Forms/form_test'
 
     export default {
         name: 'enemy',
-        components: {CustomDate, PopDialog},
+        components: {
+            CustomDate,
+            PopDialog,
+            FormTest
+        },
         data() {
             return {
                 enemyName: 'Enemy One',
@@ -55,7 +62,8 @@
                 this.show = true
             },
             closeDia() {
-                this.show = false
+                this.show = false;
+                this.$refs.form_test.resetForm();
             },
             addStudent: function () {
                 console.log(this.$store.state.list);
