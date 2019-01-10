@@ -23,6 +23,15 @@
         <pop-dialog :title="enemyName" :show.sync="show" @closeDia="closeDia">
             <form-test ref="form_test"></form-test>
         </pop-dialog>
+        <el-input v-model="searchText"></el-input>
+        <el-table :data="formData">
+            <el-table-column prop="contact.tel" label="tel" width="140">
+            </el-table-column>
+            <el-table-column prop="name" label="name" width="120">
+            </el-table-column>
+            <el-table-column prop="contact.source" label="contact.source">
+            </el-table-column>
+        </el-table>
     </div>
 </template>
 
@@ -41,11 +50,55 @@
         },
         data() {
             return {
+                result: [],
                 enemyName: 'Enemy One',
-                show: false
+                searchText: "",
+                show: false,
+                jsonData: [
+                    {
+                        name: "狼蛛",
+                        contact:
+                            {
+                                tel: 212121,
+                                source: "公司"
+                            },
+                        email: "382362623@qq.com"
+                    },
+                    {
+                        name: "雷蛇",
+                        contact:
+                            {
+                                tel: 343434,
+                                source: "公司"
+                            },
+                        email: "112121212@qq.com"
+                    },
+                    {
+                        name: "达尔优",
+                        contact:
+                            {
+                                tel: 111111,
+                                source: "客户"
+                            },
+                        email: "382362623@qq.com"
+
+                    }
+                ]
             }
         },
         computed: {
+            formData() {
+                return this.jsonData.filter((item) => {
+                    this.eachJson(item);
+                    let filter = false;
+                    for (let item in this.result) {
+                        if (this.result[item] === true) {
+                            filter = true
+                        }
+                    }
+                    return this.searchText === "" ? true : filter;
+                })
+            },
             localSum: () => {
                 return 12
             },
@@ -54,7 +107,25 @@
                 list: state => state.list
             }),
         },
+        mounted() {
+
+        },
         methods: {
+            eachJson(json) {
+                for (let item in json) {
+                    if (item === 'tel' || item === 'source') {
+                        if ((json[item].toString()).indexOf(this.searchText) !== -1) {
+                            this.result[item] = true;
+                        } else {
+                            this.result[item] = false;
+                        }
+                    }
+                    ;
+                    if (typeof (json) == 'object') {
+                        this.eachJson(json[item])
+                    }
+                }
+            },
             add: function () {
                 this.$store.commit('increace');
             },
