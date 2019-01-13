@@ -32,6 +32,29 @@
             <el-table-column prop="contact.source" label="contact.source">
             </el-table-column>
         </el-table>
+
+        <el-form :model="form">
+            <el-form-item>
+                <el-select v-model="form.country">
+                    <el-option v-for="item in countries"
+                               :key="item.value"
+                               :label="item.label"
+                               :value="item.value"></el-option>
+                </el-select>
+                <el-select v-model="form.province">
+                    <el-option v-for="item in province_selector"
+                               :key="item.value"
+                               :label="item.label"
+                               :value="item.value"></el-option>
+                </el-select>
+                <el-select v-model="form.city">
+                    <el-option v-for="item in city_selector"
+                               :key="item.value"
+                               :label="item.label"
+                               :value="item.value"></el-option>
+                </el-select>
+            </el-form-item>
+        </el-form>
     </div>
 </template>
 
@@ -39,7 +62,8 @@
     import CustomDate from "../date/customdate.vue";
     import {mapState} from 'vuex';
     import PopDialog from '@/components/PopDialog';
-    import FormTest from '@/components/PopDialog/Forms/form_test'
+    import FormTest from '@/components/PopDialog/Forms/form_test';
+    import GlobalData from './country_city_provice';
 
     export default {
         name: 'enemy',
@@ -83,10 +107,62 @@
                         email: "382362623@qq.com"
 
                     }
-                ]
+                ],
+                form: {
+                    country: "",
+                    city: "",
+                    province: ""
+                },
+                countries: [],
+                country: "",
+                province: ""
             }
         },
+        created() {
+            this.country_selector();
+        },
         computed: {
+            province_selector() {
+                let provinces = [];
+                GlobalData.Location.CountryRegion.filter((item, index) => {
+                    if (item.Name === this.form.country) {
+                        if (GlobalData.Location.CountryRegion[index].State instanceof Array) {
+                            GlobalData.Location.CountryRegion[index].State.filter(item => {
+                                provinces.push({value: item.Name, label: item.label});
+                            })
+                        } else if (GlobalData.Location.CountryRegion[index].State.City instanceof Array) {
+                            GlobalData.Location.CountryRegion[index].State.City.filter(item => {
+                                provinces.push({value: item.Name, label: item.label});
+                            })
+                        } else {
+
+                        }
+                    }
+                })
+                return provinces;
+            },
+            city_selector() {
+                let cities = [];
+                GlobalData.Location.CountryRegion.filter((item, index1) => {
+                    if (item.Name === this.form.country) {
+                        if (GlobalData.Location.CountryRegion[index1].State instanceof Array) {
+                            GlobalData.Location.CountryRegion[index1].State.filter((item, index2) => {
+                                if (item.Name === '北京') {
+                                    GlobalData.Location.CountryRegion[0].State[0].City.filter(item => {
+                                        cities.push({value: item.Name, label: item.label});
+                                    })
+                                }
+                            })
+
+                        }else{
+                            this.form.city="";
+                        }
+                    }
+
+                })
+                return cities;
+            },
+
             formData() {
                 return this.jsonData.filter((item) => {
                     this.eachJson(item);
@@ -111,6 +187,13 @@
 
         },
         methods: {
+            country_selector() {
+                let countries = [];
+                GlobalData.Location.CountryRegion.filter((item) => {
+                    countries.push({value: item.Name, label: item.label})
+                })
+                this.countries = countries;
+            },
             eachJson(json) {
                 for (let item in json) {
                     if (item === 'tel' || item === 'source') {
