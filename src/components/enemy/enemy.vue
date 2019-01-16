@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="page">
         <p>localSum is {{localSum}}</p>
         <CustomDate></CustomDate>
         <li>
@@ -26,38 +26,52 @@
         <el-input v-model="searchText"></el-input>
         <el-table :data="formData">
             <el-table-column prop="contact.tel" label="tel" width="140">
+                <template slot-scope="scope">
+                    <el-button :style="{padding:0}" class="up">{{scope.row.contact.tel}}</el-button>
+                </template>
             </el-table-column>
             <el-table-column prop="name" label="name" width="120">
             </el-table-column>
             <el-table-column prop="contact.source" label="contact.source">
+                <template slot-scope="scope">
+                    <el-button>{{scope.row.contact.source}}</el-button>
+                </template>
             </el-table-column>
         </el-table>
+        <div id="form">
+            <el-form :model="form" :label-position="'top'">
+                <el-form-item label="国家">
+                    <el-select v-model="form.country">
+                        <el-option v-for="item in countries"
+                                   :key="item.value"
+                                   :label="item.label"
+                                   :value="item.value"></el-option>
+                    </el-select>
+                    <el-select v-model="form.province">
+                        <el-option v-for="item in province_selector"
+                                   :key="item.value"
+                                   :label="item.label"
+                                   :value="item.value"></el-option>
+                    </el-select>
+                    <el-select v-model="form.city">
+                        <el-option v-for="item in city_selector"
+                                   :key="item.value"
+                                   :label="item.label"
+                                   :value="item.value"></el-option>
+                    </el-select>
+                </el-form-item>
+            </el-form>
+        </div>
 
-        <el-form :model="form">
-            <el-form-item>
-                <el-select v-model="form.country">
-                    <el-option v-for="item in countries"
-                               :key="item.value"
-                               :label="item.label"
-                               :value="item.value"></el-option>
-                </el-select>
-                <el-select v-model="form.province">
-                    <el-option v-for="item in province_selector"
-                               :key="item.value"
-                               :label="item.label"
-                               :value="item.value"></el-option>
-                </el-select>
-                <el-select v-model="form.city">
-                    <el-option v-for="item in city_selector"
-                               :key="item.value"
-                               :label="item.label"
-                               :value="item.value"></el-option>
-                </el-select>
-            </el-form-item>
-        </el-form>
     </div>
 </template>
+<style>
+    .el-form--label-top .el-form-item__label {
+        padding: 0;
+    }
 
+
+</style>
 <script>
     import CustomDate from "../date/customdate.vue";
     import {mapState} from 'vuex';
@@ -154,8 +168,8 @@
                                 }
                             })
 
-                        }else{
-                            this.form.city="";
+                        } else {
+                            this.form.city = "";
                         }
                     }
 

@@ -75,6 +75,10 @@
         padding: 0;
         margin: 0;
     }
+    .el-button{
+         padding:0;
+     }
+
 </style>
 
 <script>
