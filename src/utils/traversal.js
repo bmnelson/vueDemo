@@ -13,13 +13,20 @@ export function DepthFirstTraversal(domTree) {
 /*
 广度优先遍历
 */
-export function wideFirstTraversal(domTree) {
-  let queue = [];
-  let index = 0;
-  while (domTree[index] != null) {
-    queue.push(domTree[index])
-    index++;
+export function WideTraversal(node) {
+  let nodes = [];
+  if (node != null) {
+    let queue = node;
+    while (queue.length != 0) {
+      let item = queue.shift();
+      nodes.push(item);
+      if (item.children) {
+        let children = item.children;
+        for (let i = 0; i < children.length; i++)
+          queue.push(children[i]);
+      }
+    }
   }
-  index=0
-
+  return nodes;
 }
+

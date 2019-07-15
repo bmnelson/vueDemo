@@ -123,7 +123,8 @@ import FormTest from "@/components/PopDialog/Forms/form_test";
 import GlobalData from "./country_city_provice";
 import Bus from "@/components/Bus/Bus";
 import { debounce, A } from "@/utils/debounce";
-import { DepthFirstTraversal } from "@/utils/traversal";
+import { DepthFirstTraversal, WideTraversal } from "@/utils/traversal";
+import SPEvent from "@/utils/subscribeAndPublishMode";
 
 export default {
   name: "enemy",
@@ -253,6 +254,18 @@ export default {
   mounted() {
     Bus.$emit("showBrother", "this is my brother");
     DepthFirstTraversal(this.jsonData);
+    console.log(WideTraversal(this.jsonData));
+
+    console.log(document.getElementById("page"));
+
+    SPEvent.on("nel", data => {
+      console.log(data);
+    });
+    SPEvent.on("nel", data => {
+      console.log(data + "is good");
+    });
+
+    SPEvent.emit("nel", "son");
   },
   methods: {
     country_selector() {
